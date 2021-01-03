@@ -30,6 +30,7 @@ this.state={
       console.log("hi")
     }
 axios.post('http://localhost:8080/post',{
+  userId:user.user._id,
   title:this.state.title,
   body:this.state.body
 },{headers:{"Authorization":`Bearer ${token}`}})

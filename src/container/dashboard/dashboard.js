@@ -25,13 +25,14 @@ constructor(props){
 componentDidMount(){
   let user = JSON.parse(localStorage.getItem('user'));
   const token=user.token
-
-axios.get('http://localhost:8080/',{headers:{"Authorization":`Bearer ${token}`}})
+axios.get(`http://localhost:8080/`,{headers:{"Authorization":`Bearer ${token}`},params: { userId: user.user._id } })
     .then((response)=>{
+      
        this.setState({
            postData:response.data.postData
        })
     })
+   
 
 } 
 handleOpen=()=>{
@@ -49,7 +50,7 @@ handleSignOut=()=>{
 
     axios.post('http://localhost:8080/signout')
     .then((res)=>{
-        console.log(res)
+     
         localStorage.removeItem("user");
         localStorage.clear();
         this.props.history.push("/");
